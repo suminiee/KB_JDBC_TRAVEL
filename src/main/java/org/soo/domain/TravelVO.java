@@ -1,12 +1,16 @@
-package org.soo.travel.domain;
+package org.soo.domain;
 
-import lombok.*;
-import java.util.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class TravelVO {
     private Long no;
     private String district;

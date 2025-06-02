@@ -1,19 +1,20 @@
-package org.soo.travel.dataImport;
+package org.soo.dataimport;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 import com.opencsv.exceptions.CsvValidationException;
-import org.soo.travel.dao.TravelDao;
-import org.soo.travel.dao.TravelDaoImpl;
+import org.soo.dao.TravelDao;
+import org.soo.dao.TravelDaoImpl;
 import org.soo.database.JDBCUtil;
-import org.soo.travel.domain.TravelVO;
+import org.soo.domain.TravelVO;
 
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 
 public class ImportTravelData {
-    public static void main(String[] args)throws CsvValidationException, IOException {
+    public static void main(String[] args) throws CsvValidationException, IOException {
         TravelDao dao = new TravelDaoImpl();
+
         List<TravelVO> travels = new CsvToBeanBuilder<TravelVO>(new FileReader("travel.csv"))
                 .withType(TravelVO.class)
                 .build()

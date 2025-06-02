@@ -1,4 +1,4 @@
-package org.soo.travel.app;
+package org.soo.app;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

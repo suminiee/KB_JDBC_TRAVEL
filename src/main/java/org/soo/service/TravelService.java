@@ -1,4 +1,4 @@
-package org.soo.travel.service;
+package org.soo.service;
 
 public interface TravelService {
     // 전체 관광지 목록 출력하기

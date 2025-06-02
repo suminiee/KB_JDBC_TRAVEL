@@ -1,13 +1,13 @@
-package org.soo.travel.dao;
+package org.soo.dao;
 
-import org.soo.travel.domain.TravelImageVO;
-import org.soo.travel.domain.TravelVO;
+import org.soo.domain.TravelImageVO;
+import org.soo.domain.TravelVO;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface TravelDao {
-    void insert(TravelVO travel);
+    void insert (TravelVO travel);
     void insertImage(TravelImageVO image);
     int getTotalCount();
     List<String> getDistricts(); // 권역 목록 얻기

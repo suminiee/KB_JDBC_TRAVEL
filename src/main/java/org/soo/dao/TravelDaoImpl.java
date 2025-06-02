@@ -1,8 +1,8 @@
-package org.soo.travel.dao;
+package org.soo.dao;
 
 import org.soo.database.JDBCUtil;
-import org.soo.travel.domain.TravelImageVO;
-import org.soo.travel.domain.TravelVO;
+import org.soo.domain.TravelImageVO;
+import org.soo.domain.TravelVO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 public class TravelDaoImpl implements TravelDao{
     Connection conn = JDBCUtil.getConnection();
+
     @Override
     public void insert(TravelVO travel) {
         String sql = "insert into tbl_travel(no, district,title,description, address, phone) values(?,?,?,?,?,?)";
@@ -69,6 +69,7 @@ public class TravelDaoImpl implements TravelDao{
         }
         return districts;
     }
+
     private TravelVO map(ResultSet rs) throws SQLException {
         return TravelVO.builder()
                 .no(rs.getLong("no"))
@@ -143,16 +144,17 @@ public class TravelDaoImpl implements TravelDao{
                 .build();
     }
 
+
     @Override
     public Optional<TravelVO> getTravel(Long no) {
         TravelVO travel = null;
         String sql = """
-                    select t.*, ti.no as tino, ti.filename, ti.travel_no
-                    from tbl_travel t
-                    left outer join tbl_travel_image ti
-                    on t.no = ti.travel_no
-                    where t.no = ?;
-                    """;
+            select t.*, ti.no as tino, ti.filename, ti.travel_no
+            from tbl_travel t
+            left outer join tbl_travel_image ti
+            on t.no = ti.travel_no
+            where t.no = ?;
+            """;
         try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setLong(1, no);
             try (ResultSet rs = pstmt.executeQuery()) {
@@ -165,7 +167,7 @@ public class TravelDaoImpl implements TravelDao{
                             images.add(image);
                         } while (rs.next());
                     } catch (SQLException e) {
-// 이미지가 없는 경우 발생
+                        // 이미지가 없는 경우 발생
                     }
                     travel.setImages(images);
                     return Optional.of(travel);

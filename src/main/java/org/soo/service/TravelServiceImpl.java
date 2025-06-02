@@ -1,14 +1,16 @@
-package org.soo.travel.service;
+package org.soo.service;
 
 import lombok.RequiredArgsConstructor;
-import org.soo.travel.dao.TravelDao;
-import org.soo.travel.domain.TravelImageVO;
-import org.soo.travel.domain.TravelVO;
+import org.soo.dao.TravelDao;
+import org.soo.domain.TravelImageVO;
+import org.soo.domain.TravelVO;
 
-import java.util.*;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 @RequiredArgsConstructor
-public class TravelServiceImpl implements TravelService{
+public class TravelServiceImpl implements TravelService {
     final TravelDao dao;
 
     private int getNumber(String prompt) {
@@ -23,13 +25,11 @@ public class TravelServiceImpl implements TravelService{
             System.out.printf("%d] %s\n", i + 1, districts.get(i));
         }
     }
-
     private void printTravels(List<TravelVO> travels) {
         for (TravelVO travel : travels) {
             System.out.printf("%3d %6s %s\n", travel.getNo(), travel.getDistrict(), travel.getTitle());
         }
     }
-
     @Override
     public void printTravels() {
         List<TravelVO> travels = dao.getTravels();
@@ -58,6 +58,8 @@ public class TravelServiceImpl implements TravelService{
     @Override
     public void printTravel() {
         long no = getNumber("관광지 No: ");
+//        TravelVO travel = dao.getTravel(no).orElseThrow(
+//                () ->new NoSuchElementException("관광지 번호 " + no + "에 해당하는 데이터가 없습니다."));
         TravelVO travel = dao.getTravel(no).orElseThrow(NoSuchElementException::new);
         System.out.println("권역: " + travel.getDistrict());
         System.out.println("제목: " + travel.getTitle());

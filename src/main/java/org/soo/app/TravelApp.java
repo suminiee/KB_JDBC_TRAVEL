@@ -1,17 +1,18 @@
-package org.soo.travel.app;
+package org.soo.app;
 
+import org.soo.dao.TravelDao;
+import org.soo.dao.TravelDaoImpl;
 import org.soo.database.JDBCUtil;
-import org.soo.travel.dao.TravelDao;
-import org.soo.travel.dao.TravelDaoImpl;
-import org.soo.travel.service.TravelService;
-import org.soo.travel.service.TravelServiceImpl;
+import org.soo.service.TravelService;
+import org.soo.service.TravelServiceImpl;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class TravelApp {
     TravelService service;
     MenuItem[] menu;
     Scanner sc = new Scanner(System.in);
+
     public TravelApp() {
         TravelDao dao = new TravelDaoImpl();
         service = new TravelServiceImpl(dao);
@@ -23,6 +24,7 @@ public class TravelApp {
                 new MenuItem("종료", this::exit),
         };
     }
+
     public void exit() {
         sc.close();
         JDBCUtil.close();

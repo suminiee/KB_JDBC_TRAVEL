@@ -1,7 +1,7 @@
 package org.soo.travel;
 
 import com.opencsv.bean.CsvToBeanBuilder;
-import org.soo.travel.domain.TravelVO;
+import org.soo.domain.TravelVO;
 
 import java.io.FileReader;
 import java.util.List;
@@ -17,3 +17,4 @@ public class CSVTest2 {
         });
     }
 }
+

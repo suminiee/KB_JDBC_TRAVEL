@@ -2,7 +2,6 @@ package org.soo.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Properties;
 
 public class JDBCUtil {
@@ -22,17 +21,18 @@ public class JDBCUtil {
             e.printStackTrace();
         }
     }
+
     public static Connection getConnection() {
         return conn;
     }
 
     public static void close() {
-        try{
+        try {
             if (conn != null) {
                 conn.close();
                 conn = null;
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
